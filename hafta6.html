@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ders Programı</title>
+    <style>
+        /* Genel stil ve tablo ayarları */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Kenarlıkların birleşmesini sağlar */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            height: 60px; /* Görseldeki gibi bir yükseklik vermek için */
+            vertical-align: top; /* İçeriğin yukarıda başlaması için */
+        }
+
+        /* Hafta günleri ve saat başlıkları için stil */
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Saat dilimi sütunu için daha dar bir genişlik */
+        .saat-sutunu {
+            width: 8%;
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        /* Ders hücreleri için stil */
+        .ders {
+            /* Varsayılan ders stili */
+            font-size: 14px;
+            line-height: 1.3;
+            color: #000;
+        }
+
+        /* Öğretmen ve derslik/kredi bilgisi için farklı renkler */
+        .ders-ad {
+            color: black;
+            font-weight: bold;
+        }
+
+        .ogretmen {
+            color: green; /* Yeşil renk */
+            font-size: 13px;
+        }
+
+        .yer-kredi {
+            color: red; /* Kırmızı renk */
+            font-size: 12px;
+        }
+
+        /* Görseldeki pazartesi 8.40-10.40 dersi için özel yeşil çerçeve */
+        .pazartesi-cizgi {
+            border: 2px solid darkgreen !important; /* Önemli: Kenarlık rengini ve kalınlığını ayarlar */
+        }
+        .perşembe-cizgi {
+            border: 8px solid rgb(47, 243, 47) !important; /* Önemli: Kenarlık rengini ve kalınlığını ayarlar */
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="saat-sutunu"></th> <th>PAZARTESİ</th>
+                <th>SALI</th>
+                <th>ÇARŞAMBA</th>
+                <th>PERŞEMBE</th>
+                <th>CUMA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="saat-sutunu">8.40 - 9.30</td>
+                <td rowspan="2" class="ders pazartesi-cizgi">
+                    <div class="ders-ad">BTE307.01 Eğitimde Modelleme ve Tasarım</div>
+                    <div class="ogretmen">Dr. A. ÖZKÖK</div>
+                    <div class="yer-kredi">C-K2-10 (5)</div>
+                </td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">EGT 101.07 Eğitime Giriş</div>
+                    <div class="ogretmen">Öğr. Gör. Sıdıka Demirtaş</div>
+                    <div class="yer-kredi">C-K2-09 (3)</div>
+                </td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">BTE 219.01 Öğretim Tasarımı</div>
+                    <div class="ogretmen">Dr. Y. DEMİRASLAN ÇEVİK</div>
+                    <div class="yer-kredi">C-K2-09 (4)</div>
+                    <div class="ders-ad">BTE 311 Web Tabanlı Programlama</div>
+                    <div class="ogretmen">Dr. E. KİDİMAN DEMİRHAN</div>
+                    <div class="yer-kredi">A-ZK-15 (BÖTE Lab 2)</div>
+                </td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">EGT 303.02 Eğitimde Etik ve Ahlak</div>
+                    <div class="ogretmen">Dr. Öğr. Üyesi Zeynep Şen</div>
+                    <div class="yer-kredi">C-K3-10 (3)</div>
+                </td>
+                <td rowspan="2" class="ders"></td> </tr>
+            <tr>
+                <td class="saat-sutunu">9.40 - 10.30</td>
+            </tr>
+            <tr>
+                <td class="saat-sutunu">10.40 - 11.30</td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+            </tr>
+            <tr>
+                <td class="saat-sutunu">11.40 - 12.30</td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">BTE 213 Bilişim Sistemleri Donanımı</div>
+                    <div class="ogretmen">Dr. G. AKÇAPINAR</div>
+                    <div class="yer-kredi">A-ZK-15 (BÖTE Lab 2) (4)</div>
+                </td>
+                <td rowspan="2" class="ders"></td>
+                <td rowspan="2" class="ders"></td>
+                <td rowspan="2" class="ders"></td>
+                <td rowspan="2" class="ders"></td>
+            </tr>
+            <tr>
+                <td class="saat-sutunu">12.40 - 13.30</td>
+            </tr>
+            <tr>
+                <td class="saat-sutunu">13.40 - 14.30</td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">BTE 215 Öğretimde Materyal Tasarımı</div>
+                    <div class="ogretmen">Dr. S. SEFEROĞLU</div>
+                    <div class="yer-kredi">C-K1-13 (4)</div>
+                </td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">BTE 115 Öğretim Tekn. Temelleri</div>
+                    <div class="ogretmen">Dr. S. ARKÜN KOCADERE</div>
+                    <div class="yer-kredi">C-K1-10 (3)</div>
+                </td>
+                <td rowspan="2" class="ders">
+                    <div class="ders-ad">BTE 201 Temel Programlama</div>
+                    <div class="ogretmen">Dr. H. TÜZÜN</div>
+                    <div class="yer-kredi">C-K1-12 (4)</div>
+                </td>
+                
+            </tr>
+            <tr>
+                <td class="saat-sutunu">14.40 - 15.30</td>
+            </tr>
+            <tr>
+                <td class="saat-sutunu">15.40 - 16.30</td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+               <td rowspan="2" class="ders perşembe-cizgi">
+                
+                    <div class="ders-ad">EGT 202.07 Öğretim İlke ve Yöntemleri</div>
+                    <div class="ogretmen">Dr. Özlenen Özçınar Gedik</div>
+                    <div class="yer-kredi">C-K3-13</div>
+                </td>
+                <td class="ders"></td>
+            </tr>
+            <tr>
+                <td class="saat-sutunu">16.40 - 17.30</td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+                <td class="ders"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
