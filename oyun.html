@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS Tuğla Kırma Oyunu</title>
+<style>
+    /* Sayfa Tasarımı */
+    body {
+        background: radial-gradient(circle, #2b5876 0%, #4e4376 100%);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Oyun Alanı (Canvas) Tasarımı */
+    canvas {
+        background-color: #eee;
+        display: block;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        cursor: none; /* Oyun içindeyken mouse imlecini gizle */
+    }
+
+    .info {
+        margin-top: 15px;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+</style>
+</head>
+<body>
+
+    <h2>Tuğla Kırma</h2>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+    <div class="info">Oynamak için: <b>Mouse</b> veya <b>Sağ/Sol Ok Tuşları</b></div>
+
+    <script>
+        // Canvas Kurulumu
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // --- DEĞİŞKENLER ---
+        
+        // Top Ayarları
+        var x = canvas.width / 2;
+        var y = canvas.height - 30;
+        var dx = 3;  // Yatay hız
+        var dy = -3; // Dikey hız
+        var ballRadius = 10;
+        var ballColor = "#0095DD";
+
+        // Raket (Pedal) Ayarları
+        var paddleHeight = 10;
+        var paddleWidth = 75;
+        var paddleX = (canvas.width - paddleWidth) / 2;
+        
+        // Tuş Kontrolleri
+        var rightPressed = false;
+        var leftPressed = false;
+
+        // Tuğla (Brick) Ayarları
+        var brickRowCount = 3;
+        var brickColumnCount = 5;
+        var brickWidth = 75;
+        var brickHeight = 20;
+        var brickPadding = 10;
+        var brickOffsetTop = 30;
+        var brickOffsetLeft = 30;
+
+        var score = 0;
+
+        // Tuğlaları Oluşturma (Array Döngüsü)
+        var bricks = [];
+        for(var c=0; c<brickColumnCount; c++) {
+            bricks[c] = [];
+            for(var r=0; r<brickRowCount; r++) {
+                bricks[c][r] = { x: 0, y: 0, status: 1 };
+            }
+        }
+
+        // --- OLAY DİNLEYİCİLERİ (KLAVYE & MOUSE) ---
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+
+        function keyDownHandler(e) {
+            if(e.key == "Right" || e.key == "ArrowRight") { rightPressed = true; }
+            else if(e.key == "Left" || e.key == "ArrowLeft") { leftPressed = true; }
+        }
+
+        function keyUpHandler(e) {
+            if(e.key == "Right" || e.key == "ArrowRight") { rightPressed = false; }
+            else if(e.key == "Left" || e.key == "ArrowLeft") { leftPressed = false; }
+        }
+
+        function mouseMoveHandler(e) {
+            var relativeX = e.clientX - canvas.offsetLeft;
+            if(relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth / 2;
+            }
+        }
+
+        // --- ÇİZİM FONKSİYONLARI ---
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+            ctx.fillStyle = ballColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawPaddle() {
+            ctx.beginPath();
+            ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+            ctx.fillStyle = "#2c3e50";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawBricks() {
+            for(var c=0; c<brickColumnCount; c++) {
+                for(var r=0; r<brickRowCount; r++) {
+                    if(bricks[c][r].status == 1) {
+                        // Tuğla koordinat hesaplaması
+                        var brickX = (c*(brickWidth+brickPadding)) + brickOffsetLeft;
+                        var brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop;
+                        
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        // Her satıra farklı renk verelim
+                        if (r == 0) ctx.fillStyle = "#e74c3c"; // Kırmızı
+                        else if (r == 1) ctx.fillStyle = "#f39c12"; // Turuncu
+                        else ctx.fillStyle = "#27ae60"; // Yeşil
+                        
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+
+        function drawScore() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText("Skor: " + score, 8, 20);
+        }
+
+        // --- ÇARPIŞMA MANTIĞI ---
+        function collisionDetection() {
+            for(var c=0; c<brickColumnCount; c++) {
+                for(var r=0; r<brickRowCount; r++) {
+                    var b = bricks[c][r];
+                    if(b.status == 1) {
+                        // Top tuğlanın içine girdi mi?
+                        if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                            dy = -dy; // Yönü tersine çevir
+                            b.status = 0; // Tuğlayı yok et
+                            score++;
+                            ballColor = "#" + Math.floor(Math.random()*16777215).toString(16); // Top rengini değiştir eğlence olsun
+
+                            if(score == brickRowCount*brickColumnCount) {
+                                alert("TEBRİKLER! OYUNU KAZANDINIZ!");
+                                document.location.reload();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- ANA OYUN DÖNGÜSÜ ---
+        function draw() {
+            // Ekranı temizle
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawBricks();
+            drawBall();
+            drawPaddle();
+            drawScore();
+            collisionDetection();
+
+            // Duvarlara çarpma kontrolü
+            if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+            }
+            if(y + dy < ballRadius) {
+                dy = -dy;
+            } else if(y + dy > canvas.height-ballRadius) {
+                // Rakete çarpma kontrolü
+                if(x > paddleX && x < paddleX + paddleWidth) {
+                    dy = -dy;
+                }
+                else {
+                    // Yandı
+                    // alert("OYUN BİTTİ"); // Sürekli uyarı çıkmasın diye kapattım, direkt yeniler
+                    document.location.reload(); 
+                }
+            }
+
+            // Topu hareket ettir
+            x += dx;
+            y += dy;
+
+            // Raketi hareket ettir (Klavye için)
+            if(rightPressed && paddleX < canvas.width-paddleWidth) {
+                paddleX += 7;
+            }
+            else if(leftPressed && paddleX > 0) {
+                paddleX -= 7;
+            }
+
+            requestAnimationFrame(draw); // Animasyonu tekrar çağır
+        }
+
+        draw(); // Oyunu başlat
+
+    </script>
+
+</body>
+</html>
