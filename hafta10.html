@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doğa Albümü ve Kontrol</title>
+<style>
+    /* GENEL SAYFA AYARLARI */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Başlangıç rengi */
+        background-color: #8FBC8F; 
+        /* Renk değişiminin yumuşak olması için geçiş efekti */
+        transition: background-color 1.5s ease;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        color: white;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        margin-bottom: 20px;
+    }
+
+    /* ANA KONTEYNER (KUTULARIN DIŞ ÇERÇEVESİ) */
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* KUTULARIN GENEL STİLİ */
+    .box-frame {
+        background-color: rgba(255, 255, 255, 0.4); /* Hafif şeffaf beyaz */
+        border: 2px solid #333;
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ÜSTTEKİ BÜYÜK RESİM KUTUSU */
+    .top-section {
+        width: 600px;
+    }
+
+    .big-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+    }
+
+    /* ALTTAKİ 3'LÜ KART GRUBU */
+    .bottom-section {
+        display: flex;
+        gap: 20px;
+        width: 630px; /* Üstteki kutuyla orantılı */
+        justify-content: space-between;
+    }
+
+    .card {
+        width: 200px;
+        height: 250px;
+        /* Kartın içeriğini hizalama */
+    }
+
+    /* BUTONLARIN ALANI */
+    .btn-group {
+        margin-bottom: 10px;
+        display: flex;
+        gap: 10px;
+    }
+
+    button {
+        padding: 5px 15px;
+        cursor: pointer;
+        border: 1px solid #555;
+        background-color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+        transition: transform 0.1s;
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    .btn-show { color: green; }
+    .btn-hide { color: red; }
+
+    /* KART İÇİNDEKİ KÜÇÜK RESİMLER */
+    .small-img {
+        width: 180px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: opacity 0.5s ease;
+    }
+
+</style>
+</head>
+<body>
+
+    <h1>Doğa Galerisi</h1>
+
+    <div class="container">
+        
+        <div class="box-frame top-section">
+            <img src="https://images.unsplash.com/photo-1557050543-4d5f4e641dc6?q=80&w=800&auto=format&fit=crop" alt="Büyük Doğa Resmi" class="big-image">
+        </div>
+
+        <div class="bottom-section">
+            
+            <div class="box-frame card">
+                <div class="btn-group">
+                    <button class="btn-show" onclick="goster('img1')">Göster</button>
+                    <button class="btn-hide" onclick="gizle('img1')">Gizle</button>
+                </div>
+                <img id="img1" src="https://images.unsplash.com/photo-1470093851219-69951fcbb533?q=80&w=400&auto=format&fit=crop" alt="Manzara 1" class="small-img">
+            </div>
+
+            <div class="box-frame card">
+                <div class="btn-group">
+                    <button class="btn-show" onclick="goster('img2')">Göster</button>
+                    <button class="btn-hide" onclick="gizle('img2')">Gizle</button>
+                </div>
+                <img id="img2" src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=400&auto=format&fit=crop" alt="Hayvan 2" class="small-img">
+            </div>
+
+            <div class="box-frame card">
+                <div class="btn-group">
+                    <button class="btn-show" onclick="goster('img3')">Göster</button>
+                    <button class="btn-hide" onclick="gizle('img3')">Gizle</button>
+                </div>
+                <img id="img3" src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=400&auto=format&fit=crop" alt="Hayvan 3" class="small-img">
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- 1. GÖSTER / GİZLE FONKSİYONLARI ---
+        
+        function gizle(resimId) {
+            var resim = document.getElementById(resimId);
+            // Visibility hidden kullanıyoruz ki resim gidince kutu küçülüp düzeni bozmasın.
+            resim.style.visibility = "hidden"; 
+            resim.style.opacity = "0"; // Efektli kaybolması için
+        }
+
+        function goster(resimId) {
+            var resim = document.getElementById(resimId);
+            resim.style.visibility = "visible";
+            resim.style.opacity = "1";
+        }
+
+
+        // --- 2. ARKA PLAN RENGİNİ DEĞİŞTİRME (Her 5 Saniyede) ---
+
+        // Doğadan ilham alan renk paleti
+        const dogaRenkleri = [
+            "#8FBC8F", // Deniz Yeşili (SeaGreen)
+            "#DEB887", // Ahşap/Toprak (Burlywood)
+            "#87CEEB", // Gökyüzü Mavisi (SkyBlue)
+            "#66CDAA", // Turkuaz (MediumAquamarine)
+            "#BC8F8F", // Gül Kurusu (RosyBrown)
+            "#4682B4", // Çelik Mavisi (SteelBlue)
+            "#DAA520", // Altın Başak (GoldenRod)
+            "#556B2F"  // Zeytin Yeşili (DarkOliveGreen)
+        ];
+
+        function renkDegistir() {
+            // Diziden rastgele bir renk seç
+            const rastgeleRenk = dogaRenkleri[Math.floor(Math.random() * dogaRenkleri.length)];
+            
+            // Body rengini değiştir
+            document.body.style.backgroundColor = rastgeleRenk;
+        }
+
+        // setInterval fonksiyonu belirli süreyle işlemi tekrarlar (5000ms = 5 saniye)
+        setInterval(renkDegistir, 5000);
+
+    </script>
+
+</body>
+</html>

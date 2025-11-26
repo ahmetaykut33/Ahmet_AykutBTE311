@@ -1,30 +1,143 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ödevler</title>
+    <title>Ahmet'in Ödev Portfolyosu</title>
+    <style>
+        /* Sayfa Genel Ayarları */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Modern Mor-Mavi Geçiş */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ana Taşıyıcı Kutu */
+        .container {
+            background-color: rgba(255, 255, 255, 0.95); /* Hafif şeffaf beyaz */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        /* Başlık Stili */
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        p.subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* Link Listesi */
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Link/Buton Tasarımı */
+        a {
+            display: flex; /* İkon ve yazıyı hizalamak için */
+            align-items: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #4a4a4a;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #764ba2; /* Sol tarafa renkli çizgi */
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Linklerin Üzerine Gelince (Hover) */
+        a:hover {
+            background-color: #fff;
+            transform: translateX(10px); /* Sağa doğru hafif kayma */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: #764ba2; /* Yazı rengini değiştir */
+        }
+
+        /* İkon/Emoji Alanı */
+        .icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Ok İşareti */
+        .arrow {
+            margin-left: auto; /* Oku en sağa iter */
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        a:hover .arrow {
+            opacity: 1;
+        }
+
+    </style>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-
-    a {
-        display: block;
-        margin: 10 px 0;
-        text-decoration: none;
-        color: blue ;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-</style>
 <body>
-    <a href="hafta4.html">Forum Ödevine Git</a>
-    <a href="hafta5.html">Daireler Ödevine Git</a>
-    <a href="hafta6.html">Ders Programi Ödevine Git</a>
-    <a href="hafta7.html">Animasyon Ödevine Git</a>
+
+    <div class="container">
+        <h1>📂 Ödevlerim</h1>
+        <p class="subtitle">BÖTE Bölümü Çalışma Listesi</p>
+
+        <div class="link-list">
+            <a href="hafta4.html">
+                <span class="icon">📝</span>
+                Forum Ödevi
+                <span class="arrow">➜</span>
+            </a>
+            
+            <a href="hafta5.html">
+                <span class="icon">⭕</span>
+                Daireler Ödevi
+                <span class="arrow">➜</span>
+            </a>
+
+            <a href="hafta6.html">
+                <span class="icon">📅</span>
+                Ders Programı Ödevi
+                <span class="arrow">➜</span>
+            </a>
+
+            <a href="hafta7.html">
+                <span class="icon">✨</span>
+                Animasyon Ödevi
+                <span class="arrow">➜</span>
+            </a>
+
+            <a href="hafta9.html">
+                <span class="icon">🎓</span>
+                Hacettepe BÖTE Animasyon
+                <span class="arrow">➜</span>
+            </a>
+
+            <a href="hafta8.html">
+                <span class="icon">🔬</span>
+                Bilim İnsanları Kart Tasarımı
+                <span class="arrow">➜</span>
+            </a>
+            <a href="hafta10.html">
+                <span class="icon">🌿</span>
+                Doğa Galerisi
+                <span class="arrow">➜</span>
+        </div>
+    </div>
+
 </body>
 </html>
