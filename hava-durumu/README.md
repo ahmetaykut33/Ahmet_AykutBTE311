@@ -40,10 +40,10 @@ Bu projeyi kendi bilgisayarınızda çalıştırmak isterseniz:
     ## 📸 Ekran Görüntüleri
 
 ### Güneşli Hava Görünümü
-![Güneşli Mod](screenshots/bulutlu.png)
+![Bulutlu Hava](screenshots/bulutlu.png)
 
 ### Karlı Hava Görünümü
-![Karlı Mod](screenshots/karlı.png)
+![Karlı Hava](screenshots/karli.png)
 
 ---
 *Geliştirici: Ahmet Aykut*
