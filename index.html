@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmet'in Ödev Portfolyosu</title>
+    <title>Ahmet'in Proje ve Oyunları</title>
     <style>
         /* Sayfa Genel Ayarları */
         body {
@@ -19,7 +19,7 @@
 
         /* Ana Taşıyıcı Kutu */
         .container {
-            background-color: rgba(255, 255, 255, 0.95); /* Hafif şeffaf beyaz */
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -50,25 +50,25 @@
 
         /* Link/Buton Tasarımı */
         a {
-            display: flex; /* İkon ve yazıyı hizalamak için */
+            display: flex;
             align-items: center;
             padding: 15px 20px;
             text-decoration: none;
             color: #4a4a4a;
             background-color: #f8f9fa;
             border-radius: 12px;
-            border-left: 5px solid #764ba2; /* Sol tarafa renkli çizgi */
+            border-left: 5px solid #764ba2;
             transition: all 0.3s ease;
             font-weight: 600;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* Linklerin Üzerine Gelince (Hover) */
+        /* Hover (Üzerine Gelince) Efektleri */
         a:hover {
             background-color: #fff;
-            transform: translateX(10px); /* Sağa doğru hafif kayma */
+            transform: translateX(10px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            color: #764ba2; /* Yazı rengini değiştir */
+            color: #764ba2;
         }
 
         /* İkon/Emoji Alanı */
@@ -79,7 +79,7 @@
 
         /* Ok İşareti */
         .arrow {
-            margin-left: auto; /* Oku en sağa iter */
+            margin-left: auto;
             opacity: 0.5;
             transition: opacity 0.3s;
         }
@@ -88,15 +88,29 @@
             opacity: 1;
         }
 
+        /* Oyunlar için özel ayırıcı başlık (Opsiyonel) */
+        .section-title {
+            text-align: left;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>📂 Ödevlerim</h1>
+        <h1>📂 Projelerim</h1>
         <p class="subtitle">BÖTE Bölümü Çalışma Listesi</p>
 
         <div class="link-list">
+            
             <a href="hafta4.html">
                 <span class="icon">📝</span>
                 Forum Ödevi
@@ -120,7 +134,7 @@
                 Animasyon Ödevi
                 <span class="arrow">➜</span>
             </a>
-
+            
             <a href="hafta9.html">
                 <span class="icon">🎓</span>
                 Hacettepe BÖTE Animasyon
@@ -136,6 +150,27 @@
                 <span class="icon">🌿</span>
                 Doğa Albümü
                 <span class="arrow">➜</span>
+            </a>
+
+            <div class="section-title">Oyunlar & Uygulamalar</div>
+
+            <a href="oyun.html">
+                <span class="icon">🎮</span>
+                JS Tuğla Kırma Oyunu
+                <span class="arrow">➜</span>
+            </a>
+
+            <a href="oyun1.html">
+                <span class="icon">🛒</span> Yorumlanmış Oyun
+                <span class="arrow">➜</span>
+            </a>
+
+            <a href="hava-durumu/index.html">
+                <span class="icon">🌦️</span>
+                Hava Durumu Projesi (React)
+                <span class="arrow">➜</span>
+            </a>
+
         </div>
     </div>
 
