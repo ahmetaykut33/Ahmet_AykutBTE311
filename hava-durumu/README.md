@@ -37,5 +37,13 @@ Bu projeyi kendi bilgisayarınızda çalıştırmak isterseniz:
     npm start
     ```
 
+    ## 📸 Ekran Görüntüleri
+
+### Güneşli Hava Görünümü
+![Güneşli Mod](screenshots/bulutlu.png)
+
+### Karlı Hava Görünümü
+![Karlı Mod](screenshots/karlı.png)
+
 ---
 *Geliştirici: Ahmet Aykut*
